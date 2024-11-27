@@ -7,6 +7,7 @@ const MAX_FILE_SIZE = 1000000; // 1 MB
  
 async function postPredictHandler(request, h) {
   const { image } = request.payload;
+  const fileSize = image.bytes;
   if (fileSize > MAX_FILE_SIZE) {
     return h.response({
       status: 'fail',
