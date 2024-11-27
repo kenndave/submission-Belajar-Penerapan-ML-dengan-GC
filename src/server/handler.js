@@ -2,9 +2,17 @@ const predictClassification = require('../services/inferenceService');
 const crypto = require('crypto');
 const storeData = require('../services/storeData');
 const getData = require('../services/getData');
+
+const MAX_FILE_SIZE = 1000000; // 1 MB
  
 async function postPredictHandler(request, h) {
   const { image } = request.payload;
+  if (fileSize > MAX_FILE_SIZE) {
+    return h.response({
+      status: 'fail',
+      message: `Payload content length greater than maximum allowed: ${MAX_FILE_SIZE}`
+    }).code(413);
+  }
   const { model } = request.server.app;
  
   const { label, suggestion } = await predictClassification(model, image);
