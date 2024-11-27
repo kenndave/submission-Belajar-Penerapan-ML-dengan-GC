@@ -1,4 +1,4 @@
-FROM node:18.17.1
+FROM node:20.9.0
 WORKDIR /app
 ENV MODEL_URL 'https://storage.googleapis.com/submission-mlgc-bucket/model.json'
 COPY . .
